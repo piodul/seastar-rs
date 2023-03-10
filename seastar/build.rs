@@ -8,6 +8,7 @@ static CXX_BRIDGES: &[&str] = &[
     "src/spawn.rs",
     "src/submit_to.rs",
     "src/gate.rs",
+    "src/logger.rs",
 ];
 
 static CXX_CPP_SOURCES: &[&str] = &[
@@ -16,6 +17,7 @@ static CXX_CPP_SOURCES: &[&str] = &[
     "src/spawn.cc",
     "src/submit_to.cc",
     "src/gate.cc",
+    "src/logger.cc",
 ];
 
 fn main() {
@@ -54,6 +56,7 @@ fn main() {
         .flag_if_supported("-Wall")
         .flag_if_supported("-std=c++20")
         .flag_if_supported("-fcoroutines")
+        .flag_if_supported("-fdiagnostics-color=always")
         .includes(&seastar.include_paths)
         .cpp_link_stdlib("stdc++")
         .files(CXX_CPP_SOURCES)
