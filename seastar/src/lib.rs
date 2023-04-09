@@ -15,6 +15,8 @@ pub mod seastar_test_guard;
 mod sleep;
 mod spawn;
 mod submit_to;
+#[doc(hidden)]
+pub mod test_runner;
 
 #[doc(hidden)]
 pub use seastar_test_guard::acquire_guard_for_seastar_test;

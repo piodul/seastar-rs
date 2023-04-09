@@ -26,17 +26,9 @@ pub fn test(
         #[test]
         #(#attrs)*
         fn #name() {
-            std::thread::spawn(|| {
-                let _guard = seastar::acquire_guard_for_seastar_test();
-                let mut app = seastar::AppTemplate::default();
-                let fut = async {
-                    #body
-                    Ok(())
-                };
-                app.run_void(std::env::args().take(1), fut);
-            })
-            .join()
-            .unwrap();
+            seastar::test_runner::run_test(|| async {
+                #body
+            });
         }
     };
 
