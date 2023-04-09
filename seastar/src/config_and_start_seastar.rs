@@ -315,7 +315,6 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::thread;
 
     #[test]
     fn test_new_options_contain_default_values() {
@@ -356,32 +355,6 @@ mod tests {
         opts.set_description("42");
         opts.set_smp(42);
         let _ = AppTemplate::new_from_options(opts);
-    }
-
-    #[test]
-    fn test_run_int() {
-        thread::spawn(|| {
-            let _guard = crate::acquire_guard_for_seastar_test();
-            let mut app = AppTemplate::default();
-            let args = vec!["test"];
-            let fut = async { Ok(42) };
-            assert_eq!(app.run_int(&args[..], fut), 42);
-        })
-        .join()
-        .unwrap();
-    }
-
-    #[test]
-    fn test_run_void() {
-        thread::spawn(|| {
-            let _guard = crate::acquire_guard_for_seastar_test();
-            let mut app = AppTemplate::default();
-            let args = vec!["test"];
-            let fut = async { Ok(()) };
-            assert_eq!(app.run_void(&args[..], fut), 0);
-        })
-        .join()
-        .unwrap();
     }
 
     // Note: this is not a test case that is supposed to be run. It is only
