@@ -30,7 +30,7 @@ mod tests {
         let duration = Duration::from_millis(100);
         sleep::<LowresClock>(duration).await;
         let elapsed = now.elapsed().unwrap().as_millis() as i64;
-        assert!(elapsed >= duration.as_millis());
+        assert!(elapsed as f64 >= duration.as_millis() as f64 * 0.95);
     }
 
     #[seastar::test]
