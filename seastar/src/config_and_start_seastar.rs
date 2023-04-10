@@ -210,7 +210,7 @@ impl AppTemplate {
 
     /// Runs an app with a void callback (the output of which is always 0) and program arguments (argv).
     ///
-    /// Currently, this function can only be called once in a single thread.
+    /// Currently, this function can only be called once in a single process.
     ///
     /// # Examples
     ///
@@ -250,7 +250,7 @@ impl AppTemplate {
 
     /// Runs an app with an int (status code) callback and program arguments (argv).
     ///
-    /// Currently, this function can only be called once in a single thread.
+    /// Currently, this function can only be called once in a single process.
     ///
     /// # Examples
     ///
