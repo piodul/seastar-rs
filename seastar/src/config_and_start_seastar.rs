@@ -233,6 +233,7 @@ impl AppTemplate {
         I: IntoIterator<Item = Arg>,
         Arg: Into<OsString>,
     {
+        crate::assert_runtime_not_started_more_than_once();
         let args = get_c_args(args);
         let argc = args.len() as i32;
         let mut args: Vec<_> = args.iter().map(|s| s.as_ptr() as *mut c_char).collect();
@@ -272,6 +273,7 @@ impl AppTemplate {
         I: IntoIterator<Item = Arg>,
         Arg: Into<OsString>,
     {
+        crate::assert_runtime_not_started_more_than_once();
         let args = get_c_args(args);
         let argc = args.len() as i32;
         let mut args: Vec<_> = args.iter().map(|s| s.as_ptr() as *mut c_char).collect();
