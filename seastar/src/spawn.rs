@@ -1,5 +1,6 @@
 use crate as seastar;
 use crate::cxx_async_local_future::IntoCxxAsyncLocalFuture;
+use crate::task::spawn_impl;
 use core::cell::Cell;
 use ffi::*;
 use std::future::Future;
@@ -34,20 +35,22 @@ where
 {
     seastar::assert_runtime_is_running();
 
-    let x: Rc<Cell<Option<Ret>>> = Default::default();
+    spawn_impl(future)
 
-    let x_clone = x.clone();
-    let fut = cpp_spawn(VoidFuture::infallible_local(async move {
-        x_clone.set(Some(future.await));
-    }));
+    // let x: Rc<Cell<Option<Ret>>> = Default::default();
 
-    async move {
-        let result = fut.await;
-        match result {
-            Ok(_) => x.take().unwrap(),
-            Err(_) => panic!(),
-        }
-    }
+    // let x_clone = x.clone();
+    // let fut = cpp_spawn(VoidFuture::infallible_local(async move {
+    //     x_clone.set(Some(future.await));
+    // }));
+
+    // async move {
+    //     let result = fut.await;
+    //     match result {
+    //         Ok(_) => x.take().unwrap(),
+    //         Err(_) => panic!(),
+    //     }
+    // }
 }
 
 #[cfg(test)]

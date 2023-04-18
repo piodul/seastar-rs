@@ -13,6 +13,7 @@ mod preempt;
 mod sleep;
 mod spawn;
 mod submit_to;
+mod task;
 #[doc(hidden)]
 pub mod test_runner;
 
